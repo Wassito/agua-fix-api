@@ -4,6 +4,8 @@ import * as dotenv from 'dotenv';
 dotenv.config({ quiet: true });
 
 export const envs = {
+    AWS_REGION: env.get('AWS_REGION').required().asString(),
+    S3_BUCKET: env.get('S3_BUCKET').required().asString(),
     MAILER_SERVICE: env.get('MAILER_SERVICE').required().asString(),
     MAILER_USER: env.get('MAILER_USER').required().asString(),
     MAILER_PASSWORD: env.get('MAILER_PASSWORD').required().asString(),

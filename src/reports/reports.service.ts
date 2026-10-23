@@ -15,12 +15,14 @@ export class ReportsService {
         return await this.reportRepository.find();
     }
 
-    async createReport(dto: CreateReportDto) {
+    async createReport(dto: CreateReportDto, photoUrl: string) {
         const report = this.reportRepository.create({
             address: dto.address,
             description: dto.description,
             severity: dto.severity,
             reporterPhone: dto.reporterPhone,
+            photoUrl,
+            repairPhotoUrl: null,
             isResolved: false,
         });
         return await this.reportRepository.save(report);

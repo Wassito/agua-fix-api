@@ -15,8 +15,9 @@ const config: Config = {
   rootDir: '.',
   testRegex: '.*\\.spec\\.ts$',
   transform: {
-    '^.+\\.(t|j)s$': 'ts-jest',
+    '^.+\\.ts$': ['ts-jest', { useESM: true, tsconfig: { module: 'esnext', moduleResolution: 'bundler' } }],
   },
+  extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: pathsToModuleNameMapper(paths, { prefix: '<rootDir>/' }),
   collectCoverageFrom: [
     'src/**/*.(t|j)s',

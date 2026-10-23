@@ -4,6 +4,7 @@
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
   "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
-  }
+    "^.+\\.ts$": ["ts-jest", { "useESM": true, "tsconfig": { "module": "esnext", "moduleResolution": "bundler" } }]
+  },
+  "extensionsToTreatAsEsm": [".ts"]
 }

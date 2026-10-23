@@ -16,7 +16,7 @@ export const dataSourceOptions: DataSourceOptions = {
         User,
         Report,
     ],
-    synchronize: true,
+    synchronize: false,
     migrations: ['dist/db/migrations/[0-9]*-*.js'],
 };
 

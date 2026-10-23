@@ -1,3 +1,19 @@
+# AguaFix II
+
+API NestJS para reportes de fugas con fotografia en S3, PostgreSQL y notificacion por correo.
+
+- [Guia paso a paso de configuracion, publicacion y video](docs/GUIA-ENTREGA.md)
+- [Entregables y lista de comprobacion](docs/ENTREGABLES.md)
+- [Estado de validacion](docs/ESTADO-VALIDACION.md)
+- [Coleccion Postman](postman/AguaFix-II.postman_collection.json)
+
+Configuracion: completa tu `.env` local consultando `.env.example`; nunca lo publiques.
+Pruebas: `npm test -- --runInBand` y `npm run test:acceptance`.
+Docker: configura `DOCKER_IMAGE=wassit0/agua-fix-api`, publica con Actions y ejecuta `docker compose pull api` seguido de `docker compose up -d`.
+Compose aplica migraciones antes de iniciar; `synchronize` permanece desactivado.
+
+La documentacion original del generador NestJS se conserva debajo.
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>

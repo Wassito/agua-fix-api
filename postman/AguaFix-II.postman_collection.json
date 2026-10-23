@@ -1,0 +1,70 @@
+{
+  "info": {
+    "name": "AguaFix II - Examen",
+    "description": "Selecciona un archivo local en photo antes de enviar el POST. No agregues Content-Type manualmente.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }],
+  "item": [
+    {
+      "name": "Crear reporte con foto",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/reports",
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "address", "value": "Calle Prueba 123", "type": "text" },
+            { "key": "description", "value": "Fuga visible en banqueta", "type": "text" },
+            { "key": "severity", "value": "high", "type": "text" },
+            { "key": "reporterPhone", "value": "4491234567", "type": "text" },
+            { "key": "photo", "type": "file", "src": "" }
+          ]
+        }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Creado', () => pm.response.to.have.status(201));",
+        "pm.test('URL publica y foto de reparacion', () => { const r = pm.response.json(); pm.expect(r.photoUrl).to.match(/^https:\\/\\/.*\\/reports\\//); pm.expect(r).to.have.property('repairPhotoUrl'); });"
+      ] } }]
+    },
+    {
+      "name": "Listar reportes",
+      "request": { "method": "GET", "url": "{{baseUrl}}/reports" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Listado', () => pm.response.to.have.status(200));",
+        "pm.test('Ambas URLs presentes', () => { pm.response.json().forEach(r => { pm.expect(r).to.have.property('photoUrl'); pm.expect(r).to.have.property('repairPhotoUrl'); }); });"
+      ] } }]
+    },
+    {
+      "name": "Crear reporte sin foto - debe fallar",
+      "request": {
+        "method": "POST", "url": "{{baseUrl}}/reports",
+        "body": { "mode": "formdata", "formdata": [
+          { "key": "address", "value": "Calle Prueba 123", "type": "text" },
+          { "key": "description", "value": "Fuga sin foto", "type": "text" },
+          { "key": "severity", "value": "high", "type": "text" },
+          { "key": "reporterPhone", "value": "4491234567", "type": "text" }
+        ] }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Foto obligatoria', () => pm.response.to.have.status(400));"
+      ] } }]
+    },
+    {
+      "name": "Registrar usuario de prueba",
+      "request": {
+        "method": "POST", "url": "{{baseUrl}}/auth/register",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Ciudadano de prueba\",\n  \"email\": \"ciudadano@example.com\",\n  \"password\": \"SoloPrueba-12345\",\n  \"isNotificationEnabled\": true\n}" }
+      }
+    },
+    {
+      "name": "Login usuario de prueba",
+      "request": {
+        "method": "POST", "url": "{{baseUrl}}/auth/login",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"ciudadano@example.com\",\n  \"password\": \"SoloPrueba-12345\"\n}" }
+      }
+    }
+  ]
+}
