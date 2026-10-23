@@ -4,6 +4,6 @@
     "Sid": "UploadReportPhotos",
     "Effect": "Allow",
     "Action": "s3:PutObject",
-    "Resource": "arn:aws:s3:::REPLACE_BUCKET_NAME/reports/*"
+    "Resource": "arn:aws:s3:::aguafix-wassit0-fotos-2026/reports/*"
   }]
 }

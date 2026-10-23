@@ -15,5 +15,7 @@ docs
 postman
 .github
 .vscode
+.tmp
+.temp
 *.zip
 *.log

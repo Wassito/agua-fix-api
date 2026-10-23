@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-23T06:54:34.326Z",
+  "baseUrl": "http://127.0.0.1:3000",
+  "reportId": 4,
+  "postStatus": 201,
+  "getStatus": 200,
+  "missingPhotoStatus": 400,
+  "photoUrl": "https://aguafix-wassit0-fotos-2026.s3.us-east-2.amazonaws.com/reports/132d53a2-ea54-46b0-90ba-e364817e44ad.png",
+  "repairPhotoUrl": null,
+  "publicPhotoStatus": 200,
+  "previousReportsPreserved": 3,
+  "smtpAcceptedByApi": true,
+  "inboxAndImageVisibility": "CONFIRMADO por el usuario: correo recibido e imagen visible"
+}

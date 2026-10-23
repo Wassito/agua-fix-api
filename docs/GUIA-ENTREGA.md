@@ -2,7 +2,21 @@
 
 Repositorio identificado: https://github.com/Wassito/agua-fix-api
 
-Imagen prevista (no implica que ya este publicada): https://hub.docker.com/r/wassit0/agua-fix-api
+Imagen publicada y verificada: https://hub.docker.com/r/wassit0/agua-fix-api
+
+## Estado real verificado el 23 de octubre de 2026
+
+- Imagen publicada: wassit0/agua-fix-api:latest; workflow inicial exitoso: https://github.com/Wassito/agua-fix-api/actions/runs/39911655264
+- Bucket configurado: aguafix-wassit0-fotos-2026, region us-east-2 (Ohio). Las referencias a us-east-1 en los ejemplos son solo ejemplos; conserva us-east-2 en este entorno.
+- Compose local usa COMPOSE_PROJECT_NAME=aguafix-api en .env para reutilizar aguafix-api_postgres_data. No cambies ese valor sin revisar el volumen.
+- Copia previa local: .tmp/backups/aguafix-api-postgres-before-photos.tar.gz. Contiene datos de la BD; no se versiona ni se entrega publicamente.
+- API de la imagen publicada funcionando en http://localhost:3000; reporte de prueba ID 4 creado; los tres reportes anteriores siguen presentes.
+- S3 y foto publica verificados, POST 201, GET 200, POST sin foto 400. El servidor SMTP acepto el correo desde Docker.
+- El usuario confirmo correo recibido e imagen visible. Falta grabar el video obligatorio desde Postman.
+
+Para pruebas manuales hay una imagen rotulada en postman/foto-prueba.png. Para el video del examen selecciona una fotografia de una fuga, segun el enunciado.
+
+Los scripts test/s3-live.cjs y test/reports-live.cjs se ejecutan SOLO manualmente: crean objetos reales; el segundo tambien crea un reporte y envia correo. No los repitas sin revisar primero GET /reports. El fallo DNS de Nodemailer observado desde Windows no se reproduce en la imagen Docker; usa Docker para la demostracion.
 
 ## 1. Que quedo implementado
 
@@ -37,10 +51,10 @@ Resultado: Node 22 y Docker mostrando cliente y servidor; Compose mostrando vers
 
 Si tu escuela ofrece AWS Academy/Learner Lab, inicia primero el laboratorio y usa sus permisos y credenciales temporales; pueden restringir buckets publicos. Si no, necesitas una cuenta AWS activa. No crees claves de acceso del usuario raiz.
 
-1. En S3 crea un bucket de proposito general con nombre unico sin puntos, por ejemplo aguafix-wassito-<sufijo>. Elige una region y anotala exactamente, por ejemplo us-east-1.
+1. En S3 crea un bucket de proposito general con nombre unico sin puntos, por ejemplo aguafix-wassit0-fotos-2026. Elige una region y anotala exactamente, por ejemplo us-east-1.
 2. Deja Object Ownership en Bucket owner enforced (ACL deshabilitadas) y cifrado SSE-S3. La aplicacion no utiliza ACL.
 3. Para cumplir la URL publica permanente del examen, permite lectura publica SOLO de reports/* mediante bucket policy. En Block Public Access conserva los bloqueos de ACL y permite las politicas publicas (BlockPublicPolicy y RestrictPublicBuckets deben permitirlo). El bloqueo a nivel cuenta u organizacion tambien puede impedirlo; no cambies politicas de una cuenta compartida sin su administrador.
-4. En Permissions → Bucket policy pega docs/aws/bucket-public-read.json, reemplazando REPLACE_BUCKET_NAME por tu bucket. La politica concede unicamente s3:GetObject sobre reports/*, nunca escritura publica.
+4. En Permissions → Bucket policy pega docs/aws/bucket-public-read.json, reemplazando el nombre del bucket si usas uno diferente; el archivo ya apunta a aguafix-wassit0-fotos-2026. La politica concede unicamente s3:GetObject sobre reports/*, nunca escritura publica.
 5. En IAM crea una identidad para esta aplicacion. Para trabajo local puedes crear un usuario sin acceso a consola y asignarle docs/aws/iam-upload.json, sustituyendo el bucket. Esta politica concede solo s3:PutObject en reports/*.
 6. Crea su access key para el uso local de la aplicacion. Guarda Access key ID y Secret access key unicamente en tu .env. Si son credenciales temporales, necesitas tambien AWS_SESSION_TOKEN y renovarlas al expirar.
 7. Si una politica de la escuela impide lectura publica, informa al profesor: una URL firmada que caduca no equivale a la URL publica permanente solicitada. No cambies el requisito silenciosamente.
@@ -128,7 +142,7 @@ git commit -m "feat: fotos de reportes en S3 y publicacion Docker automatica"
 git push origin main
 ```
 
-No se ha hecho commit/push automaticamente: faltan las cuentas externas y este momento forma parte de la evidencia. No grabes .env, tokens, ni la pantalla con claves. Si Git pide autenticarte, usa su ventana de inicio de sesion.
+El commit inicial c4e1264 ya se publico y su workflow termino en verde. Para el video hace falta grabar otro cambio de codigo con su commit/push y la nueva ejecucion. No grabes .env, tokens, ni la pantalla con claves. Si Git pide autenticarte, usa su ventana de inicio de sesion.
 
 En GitHub abre Actions y el workflow Build and publish AguaFix. Espera a que compile, pruebe y publique en verde. Luego abre Docker Hub → Tags: latest debe mostrar una fecha nueva. No basta con que se construya localmente.
 
