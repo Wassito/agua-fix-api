@@ -1,9 +1,7 @@
 import { envs } from '../config/envs';
 import { User } from '../users/entities/user.entity';
-import * as ReportModule from '../reports/entities/report.entity';
+import { Report } from '../reports/entities/report.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
-
-const Report = 'Report' in ReportModule ? ReportModule.Report : (ReportModule as any).default;
 
 export const dataSourceOptions: DataSourceOptions = {
     host: envs.DB_HOST,

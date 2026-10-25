@@ -1,4 +1,4 @@
-name: Build and publish AguaFix
+name: Compilar y publicar AguaFix
 on:
   push:
     branches: [main]

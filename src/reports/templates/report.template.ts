@@ -56,7 +56,7 @@ export const generateReportTemplate = (dto: CreateReportDto, photoUrl: string): 
           <tr>
             <td style="background-color:#1e6fd9;background-image:linear-gradient(135deg,#1e6fd9 0%,#0f4c9c 100%);padding:36px 32px;text-align:center;">
               <div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:3px;text-transform:uppercase;color:#dbeafe;">AguaFix · Nuevo reporte</div>
-              <div style="font-family:Helvetica,Arial,sans-serif;font-size:36px;line-height:44px;font-weight:bold;color:#ffffff;padding-top:10px;">🚿 Fuga reportada</div>
+              <div style="font-family:Helvetica,Arial,sans-serif;font-size:36px;line-height:44px;font-weight:bold;color:#ffffff;padding-top:10px;">🚿 Nuevo Reporte de FUGA DE AGUA</div>
             </td>
           </tr>
 

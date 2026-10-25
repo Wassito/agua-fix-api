@@ -1,57 +1,91 @@
-# compiled output
-/dist
-/node_modules
-/build
+# Dependencias y compilacion
+node_modules/
+/dist/
+/build/
 *.tsbuildinfo
 
-# Logs
-logs
+# Variables y credenciales locales
+.env
+.env.*
+*.env
+!.env.example
+.envrc
+.npmrc
+.netrc
+.git-credentials
+.aws/
+.docker/
+.ssh/
+/secrets/
+/credentials/
+credentials.json
+credentials.csv
+service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Exportaciones de Postman que pueden incluir tokens
+*.postman_environment.json
+*.postman_globals.json
+*.postman_dump.json
+
+# Datos, respaldos y archivos enviados localmente
+/backups/
+/uploads/
+/data/
+*.dump
+*.backup
+*.bak
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+
+# Archivos comprimidos, evidencia y grabaciones
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+/recordings/
+/artifacts/
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.webm
+
+# Logs, cobertura y temporales
+logs/
 *.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
+/coverage/
+/.nyc_output/
+.tmp/
+.temp/
+*.tmp
+*.swp
+*.swo
+pids/
+*.pid
+*.pid.lock
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-# OS
-.DS_Store
-Thumbs.db
-Desktop.ini
-
-# Tests
-/coverage
-/.nyc_output
-
-# IDEs and editors
-/.idea
+# Configuracion local de editores y sistema operativo
+.vscode/
+.idea/
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
-
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# dotenv environment variable files
-.env
-.env.*
-!.env.example
-
-# temp directory
-.temp
-.tmp
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+.DS_Store
+Thumbs.db
+Desktop.ini
